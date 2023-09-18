@@ -104,7 +104,7 @@
             <div class="total-views">Total Views: <span id="viewCount">0</span></div>
             <div class="total-followers animated">Total Followers: <span id="followerCount">3,50,674</span></div>
             <div class="coming-soon-banner">Coming Soon</div>
-            <button type="button" class="mt-2 btn btn-sm btn-primary">Follow</button>
+            <button type="button" id="follow" class="mt-2 btn btn-sm btn-primary">Follow</button>
         </div>
     </section>
 
@@ -147,24 +147,27 @@
 <!-- jQuery -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <!-- Custom JavaScript for the media player -->
-<script>
-    $(document).ready(function () {
-        // Initialize the view count (replace with your actual tracking logic)
-        let viewCount = 0;
-        const videoElement = document.getElementById('customVideo');
-        const viewCountElement = document.getElementById('viewCount');
+<!--<script>-->
+<!--    $(document).ready(function () {-->
+<!--        // Initialize the view count (replace with your actual tracking logic)-->
+<!--        let viewCount = 0;-->
+<!--        const videoElement = document.getElementById('customVideo');-->
+<!--        const viewCountElement = document.getElementById('viewCount');-->
 
-        // Simulate increasing view count every second
-        setInterval(function () {
-            viewCount++;
-            viewCountElement.textContent = viewCount;
-        }, 3000);
+<!--        // Simulate increasing view count every second-->
+<!--        setInterval(function () {-->
+<!--            viewCount++;-->
+<!--            viewCountElement.textContent = viewCount;-->
+<!--        }, 3000);-->
 
-        // Simulate live status (replace with your actual live status logic)
-        const liveIconElement = document.querySelector('.live-icon');
-        const isLive = true; // Replace with your live status logic
-        liveIconElement.style.display = isLive ? 'block' : 'none';
-    });
-</script>
+<!--        // Simulate live status (replace with your actual live status logic)-->
+<!--        const liveIconElement = document.querySelector('.live-icon');-->
+<!--        const isLive = true; // Replace with your live status logic-->
+<!--        l-->
+<!--</script>-->
+
+{% block js %}
+
+{% endblock js %}
 </body>
 </html>

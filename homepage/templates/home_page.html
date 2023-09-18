@@ -1,1 +1,19 @@
 {% extends 'base.html' %}
+{% block js %}
+    <script>
+    $(document).ready(function() {
+        $("#follow").click(function() {
+            $.ajax({
+                type: "GET",
+                url: "/follow/",
+                success: function(data) {
+                    console.log(data, '---------------data')
+                },
+                error: function(xhr, status, error) {
+                    console.error(error);
+                }
+            });
+        });
+    });
+</script>
+{% endblock js %}
