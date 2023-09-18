@@ -1,6 +1,49 @@
 {% extends 'base.html' %}
+
+{% block content %}
+<main>
+
+    <section class="container my-5">
+        <!-- Custom media player section -->
+        <h2>Live TV</h2>
+        <div class="custom-player">
+            <video controls id="customVideo">
+                <!-- Include your video source here -->
+                <source src="your-video-source.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <div class="live-icon animated">Live</div>
+            <div class="total-views">Total Views: <span id="viewCount">0</span></div>
+            <div class="total-followers animated">Total Followers: <span id="followerCount">{{follow}}</span></div>
+            <div class="coming-soon-banner">Coming Soon</div>
+            <button class="mt-2 btn btn-sm btn-primary" id="follow" type="button">Follow</button>
+        </div>
+    </section>
+
+    <section class="container my-5">
+        <div class="row">
+            <div class="col-md-8">
+                <!-- Main news content -->
+                <h1>Main News Headline</h1>
+                <p>News article content goes here.</p>
+            </div>
+            <div class="col-md-4">
+                <!-- Sidebar or additional news -->
+                <h3>Related News</h3>
+                <ul>
+                    <li><a href="#">News Item 1</a></li>
+                    <li><a href="#">News Item 2</a></li>
+                    <li><a href="#">News Item 3</a></li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+</main>
+{% endblock content %}
+
 {% block js %}
-    <script>
+<script>
     $(document).ready(function() {
         $("#follow").click(function() {
             $.ajax({
@@ -15,5 +58,6 @@
             });
         });
     });
+
 </script>
 {% endblock js %}
