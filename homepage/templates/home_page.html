@@ -50,7 +50,7 @@
                 type: "GET",
                 url: "/follow/",
                 success: function(data) {
-                    console.log(data, '---------------data')
+                    $('#followerCount').html(data.follow);
                 },
                 error: function(xhr, status, error) {
                     console.error(error);
