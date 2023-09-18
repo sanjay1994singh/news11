@@ -17,4 +17,6 @@ def home_page(request):
 
 def follow(request):
     follow = Follow.objects.first()
+    follow.follow = int(follow.follow) + 1
+    follow.save()
     return JsonResponse({'follow': follow})
