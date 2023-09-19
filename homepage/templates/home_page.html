@@ -7,10 +7,9 @@
         <!-- Custom media player section -->
         <h2>Live TV</h2>
         <div class="custom-player">
-            <video controls id="customVideo">
+            <video class="plyr" controls id="customVideo">
                 <!-- Include your video source here -->
-                <source src="" type="video/mp4">
-                Your browser does not support the video tag.
+                <source src="media/my_video.mp4" type="video/mp4">
             </video>
             <div class="live-icon animated">Live</div>
             <div class="total-views">Total Views: <span id="viewCount">0</span></div>
@@ -71,4 +70,12 @@
     });
 
 </script>
+
+<script src="https://cdn.jsdelivr.net/npm/plyr@3.6.4/dist/plyr.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const players = Plyr.setup('.plyr');
+    });
+</script>
+
 {% endblock js %}
