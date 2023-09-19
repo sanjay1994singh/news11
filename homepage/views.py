@@ -31,7 +31,7 @@ def follow(request):
 
         subject = 'Your OTP Verification Code'
         message = f'Your OTP code is: {otp}'
-        from_email = 'info@news11.agency'  # Replace with your email
+        from_email = 'info@sanjay.solutions'  # Replace with your email
         recipient_list = email  # Replace with the user's email
 
         email = EmailMessage(subject, message, from_email, [recipient_list])
