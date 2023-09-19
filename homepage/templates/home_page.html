@@ -56,10 +56,13 @@
 <script>
     $(document).ready(function() {
         $("#follow").click(function() {
+            var email = prompt('Enter email address')
             $.ajax({
                 type: "GET",
                 url: "/follow/",
+                data:{'email':email},
                 success: function(data) {
+                    console.log(data.otp,'--------------otp')
                     $('#followerCount').html(data.follow);
                 },
                 error: function(xhr, status, error) {
