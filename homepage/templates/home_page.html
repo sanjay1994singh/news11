@@ -7,14 +7,13 @@
         <!-- Custom media player section -->
         <h2>Live TV</h2>
         <div class="custom-player">
-            <video class="plyr" controls id="customVideo">
+            <video class="" controls id="customVideo">
                 <!-- Include your video source here -->
-                <source src="media/my_video.mp4" type="video/mp4">
+                <source src="\C:\Users\91827\OneDrive\Desktop\news11\my_video.mp4" type="video/mp4">
             </video>
             <div class="live-icon animated">Live</div>
-            <div class="total-views">Total Views: <span id="viewCount">0</span></div>
+            <div class="total-views">Watching Views: <span id="viewCount">{{view}}</span></div>
             <div class="total-followers animated">Total Followers: <span id="followerCount">{{follow}}</span></div>
-<!--            <div class="coming-soon-banner">Coming Soon</div>-->
             <button class="mt-2 btn btn-sm btn-primary" id="follow" type="button">Follow</button>
         </div>
     </section>
@@ -56,11 +55,9 @@
 <script>
     $(document).ready(function() {
         $("#follow").click(function() {
-            var email = prompt('Enter email address')
             $.ajax({
                 type: "GET",
                 url: "/follow/",
-                data:{'email':email},
                 success: function(data) {
                     console.log(data.otp,'--------------otp')
                     $('#followerCount').html(data.follow);
@@ -71,6 +68,27 @@
             });
         });
     });
+
+    function myFunction() {
+        $.ajax({
+            type: "GET",
+            url: "/watching-views/",
+            success: function(data) {
+                console.log(data,'--------------data')
+                $('#viewCount').html(data.view);
+            },
+            error: function(xhr, status, error) {
+                console.error(error);
+            }
+        });
+    }
+
+    // Call the function initially
+    myFunction();
+
+    // Schedule the function to run every minute (60,000 milliseconds)
+    setInterval(myFunction, 10000);
+
 
 </script>
 

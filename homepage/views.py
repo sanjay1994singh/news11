@@ -1,7 +1,7 @@
 from django.http import JsonResponse
 from django.shortcuts import render
 from django.core.mail import EmailMessage
-from .models import Follow, FollowVerify
+from .models import Follow, FollowVerify, Watchingviews
 import random
 from django.core.mail import send_mail
 
@@ -18,24 +18,24 @@ def home_page(request):
 
 def follow(request):
     if request.method == 'GET':
-        email = request.GET.get('email')
-        # status = request.GET.get('status')
-        # if status:
-        status = 'pending'
-        # Generate a random 6-digit number
-        otp = random.randint(100000, 999999)
-        try:
-            FollowVerify.objects.create(email=email, otp=otp, verify=status)
-        except:
-            FollowVerify.objects.filter(email=email).update(email=email, otp=otp, verify=status)
-
-        subject = 'Your OTP Verification Code'
-        message = f'Your OTP code is: {otp}'
-        from_email = 'info@sanjay.solutions'  # Replace with your email
-        recipient_list = email  # Replace with the user's email
-
-        email = EmailMessage(subject, message, from_email, [recipient_list])
-        email.send()
+        # email = request.GET.get('email')
+        # # status = request.GET.get('status')
+        # # if status:
+        # status = 'pending'
+        # # Generate a random 6-digit number
+        # otp = random.randint(100000, 999999)
+        # try:
+        #     FollowVerify.objects.create(email=email, otp=otp, verify=status)
+        # except:
+        #     FollowVerify.objects.filter(email=email).update(email=email, otp=otp, verify=status)
+        #
+        # subject = 'Your OTP Verification Code'
+        # message = f'Your OTP code is: {otp}'
+        # from_email = 'info@sanjay.solutions'  # Replace with your email
+        # recipient_list = email  # Replace with the user's email
+        #
+        # email = EmailMessage(subject, message, from_email, [recipient_list])
+        # email.send()
 
         follow = Follow.objects.first()
         follow.follow = int(follow.follow) + 1
@@ -46,7 +46,26 @@ def follow(request):
 
         json_data = {
             'follow': follow,
-            'otp': otp
+            # 'otp': otp
+        }
+
+
+        return JsonResponse(json_data)
+
+
+def watching_views(request):
+    if request.method == 'GET':
+        increase_view = random.randint(54, 94)
+        print(increase_view,'==============inview')
+        count = Watchingviews.objects.first()
+        count.view = int(count.view) + int(increase_view)
+        count.save()
+
+        view = Watchingviews.objects.first()
+        view = view.view
+
+        json_data = {
+            'view': view,
         }
 
 

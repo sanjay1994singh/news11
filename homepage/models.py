@@ -6,6 +6,10 @@ class Follow(models.Model):
     follow = models.BigIntegerField(null=True, blank=True)
 
 
+class Watchingviews(models.Model):
+    view = models.BigIntegerField(null=True, blank=True)
+
+
 class FollowVerify(models.Model):
     email = models.EmailField(unique=True)
     otp = models.IntegerField()
