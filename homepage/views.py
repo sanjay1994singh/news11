@@ -63,7 +63,8 @@ def follow(request):
 
 def watching_views(request):
     if request.method == 'GET':
-        increase_view = random.randint(54, 94)
+        # increase_view = random.randint(54, 94)
+        increase_view = 1
         count = Watchingviews.objects.first()
         count.view = int(count.view) + int(increase_view)
         count.save()
