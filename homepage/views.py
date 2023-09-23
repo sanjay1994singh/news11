@@ -1,7 +1,7 @@
 from django.http import JsonResponse
 from django.shortcuts import render
 from django.core.mail import EmailMessage
-from .models import Follow, FollowVerify, Watchingviews
+from .models import Follow, FollowVerify, Watchingviews, LiveVideo
 import random
 from django.core.mail import send_mail
 
@@ -10,8 +10,16 @@ def home_page(request):
     follow = Follow.objects.first()
     follow = follow.follow
 
+
+    video = LiveVideo.objects.first()
+    try:
+        video = video.url
+    except Exception as e:
+        video = ''
+        print(e, '------e---------')
     context = {
-        'follow': follow
+        'follow': follow,
+        'video': video,
     }
     return render(request, 'home_page.html', context)
 
@@ -56,7 +64,6 @@ def follow(request):
 def watching_views(request):
     if request.method == 'GET':
         increase_view = random.randint(54, 94)
-        print(increase_view,'==============inview')
         count = Watchingviews.objects.first()
         count.view = int(count.view) + int(increase_view)
         count.save()
@@ -67,6 +74,5 @@ def watching_views(request):
         json_data = {
             'view': view,
         }
-
 
         return JsonResponse(json_data)

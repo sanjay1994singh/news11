@@ -17,3 +17,10 @@ class FollowVerify(models.Model):
 
     def __str__(self):
         return self.email
+
+
+class LiveVideo(models.Model):
+    url = models.TextField(null=True, blank=True)
+
+    def __str__(self):
+        return self.url

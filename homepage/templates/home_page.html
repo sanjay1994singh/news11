@@ -1,5 +1,23 @@
 {% extends 'base.html' %}
+{% block css %}
+<style>
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio (930/523) */
+            height: 0;
+            overflow: hidden;
+        }
 
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+</style>
+{% endblock css %}
 {% block content %}
 <main>
 
@@ -7,11 +25,19 @@
         <!-- Custom media player section -->
         <h2>Live TV</h2>
         <div class="custom-player">
-            <video class="" controls id="customVideo">
-                <!-- Include your video source here -->
-                <source src="\C:\Users\91827\OneDrive\Desktop\news11\my_video.mp4" type="video/mp4">
-            </video>
-            <div class="live-icon animated">Live</div>
+<!--            <video class="" controls id="customVideo">-->
+<!--                &lt;!&ndash; Include your video source here &ndash;&gt;-->
+<!--                <source src="https://youtu.be/fZn2NyTpd3M" type="video/mp4">-->
+<!--            </video>-->
+
+            <div class="video-container">
+                <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen frameborder="0" height="523"
+                        src="{{video}}"
+                        title="LIVE🛑 ll वृंदावन से राधा अष्टमी चाव की सवारी का सीधा प्रसारण  IIVrindavan"
+                        width="930"></iframe>
+            </div>
+
+<!--            <div class="live-icon animated">Live</div>-->
             <div class="total-views">Watching Views: <span id="viewCount">{{view}}</span></div>
             <div class="total-followers animated">Total Followers: <span id="followerCount">{{follow}}</span></div>
             <button class="mt-2 btn btn-sm btn-primary" id="follow" type="button">Follow</button>
@@ -20,33 +46,40 @@
 
     <section class="container my-5">
         <div class="row">
-    <div class="col-lg-6 col-md-6 col-sm-12">
-        <iframe width="100%" height="315" src="https://www.youtube.com/embed/m0yuncmrtbc" title="|| बुधवार को धीरेंद्र शास्त्री करेंगे सप्त ऋषि पूजन||" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-    </div>
+            <div class="col-lg-6 col-md-6 col-sm-12">
+                <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen frameborder="0"
+                        height="315" src="https://www.youtube.com/embed/m0yuncmrtbc"
+                        title="|| बुधवार को धीरेंद्र शास्त्री करेंगे सप्त ऋषि पूजन||"
+                        width="100%"></iframe>
+            </div>
 
-    <div class="col-lg-6 col-md-6 col-sm-12">
-        <iframe width="100%" height="315" src="https://www.youtube.com/embed/fo-IJ49geuw" title="बांके बिहारी की मंगला आरती के नहीं हुए श्रद्धालुओं को दर्शन प्रशासन की व्यवस्था पर सवालिया निशान" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-    </div>
-</div>
+            <div class="col-lg-6 col-md-6 col-sm-12">
+                <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen frameborder="0"
+                        height="315"
+                        src="https://www.youtube.com/embed/fo-IJ49geuw"
+                        title="बांके बिहारी की मंगला आरती के नहीं हुए श्रद्धालुओं को दर्शन प्रशासन की व्यवस्था पर सवालिया निशान"
+                        width="100%"></iframe>
+            </div>
+        </div>
 
 
-<!--        <div class="row">-->
-<!--            <div class="col-md-8">-->
-<!--                &lt;!&ndash; Main news content &ndash;&gt;-->
-<!--                <h1>Main News Headline</h1>-->
-<!--                <p>News article content goes here.</p>-->
-<!--            </div>-->
-<!--            <div class="col-md-4">-->
-<!--                &lt;!&ndash; Sidebar or additional news &ndash;&gt;-->
-<!--                <h3>Related News</h3>-->
-<!--                <ul>-->
-<!--                    <li><a href="#">News Item 1</a></li>-->
-<!--                    <li><a href="#">News Item 2</a></li>-->
-<!--                    <li><a href="#">News Item 3</a></li>-->
-<!--                </ul>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </section>-->
+        <!--        <div class="row">-->
+        <!--            <div class="col-md-8">-->
+        <!--                &lt;!&ndash; Main news content &ndash;&gt;-->
+        <!--                <h1>Main News Headline</h1>-->
+        <!--                <p>News article content goes here.</p>-->
+        <!--            </div>-->
+        <!--            <div class="col-md-4">-->
+        <!--                &lt;!&ndash; Sidebar or additional news &ndash;&gt;-->
+        <!--                <h3>Related News</h3>-->
+        <!--                <ul>-->
+        <!--                    <li><a href="#">News Item 1</a></li>-->
+        <!--                    <li><a href="#">News Item 2</a></li>-->
+        <!--                    <li><a href="#">News Item 3</a></li>-->
+        <!--                </ul>-->
+        <!--            </div>-->
+        <!--        </div>-->
+        <!--    </section>-->
 
 </main>
 {% endblock content %}
@@ -90,6 +123,7 @@
     setInterval(myFunction, 10000);
 
 
+
 </script>
 
 <script src="https://cdn.jsdelivr.net/npm/plyr@3.6.4/dist/plyr.min.js"></script>
@@ -97,6 +131,7 @@
     document.addEventListener('DOMContentLoaded', function () {
         const players = Plyr.setup('.plyr');
     });
+
 </script>
 
 {% endblock js %}
