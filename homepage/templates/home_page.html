@@ -24,23 +24,31 @@
     <section class="container my-5">
         <!-- Custom media player section -->
         <h2>Live TV</h2>
-        <div class="custom-player">
-<!--            <video class="" controls id="customVideo">-->
-<!--                &lt;!&ndash; Include your video source here &ndash;&gt;-->
-<!--                <source src="media/my_video.mp4" type="video/mp4">-->
-<!--            </video>-->
+        <div class="custom-player mb-5">
 
             <div class="video-container">
                 <video class="" controls id="customVideo">
                 <!-- Include your video source here -->
                 <source src="media/my_video.mp4" type="video/mp4">
-            </video>
+                </video>
             </div>
 
-<!--            <div class="live-icon animated">Live</div>-->
-            <div class="total-views">Watching Views: <span id="viewCount">{{view}}</span></div>
+            <div class="total-views">Watching Views: <span id="viewCount1">{{view_first}}</span></div>
             <div class="total-followers animated">Total Followers: <span id="followerCount">{{follow}}</span></div>
             <button class="mt-2 btn btn-sm btn-primary" id="follow" type="button">Follow</button>
+        </div>
+
+        <div class="custom-player mb-5">
+
+            <div class="video-container">
+                <video class="" controls id="customVideo">
+                <!-- Include your video source here -->
+                <source src="media/my_video.mp4" type="video/mp4">
+                </video>
+            </div>
+
+            <div class="total-views">Watching Views: <span id="viewCount2">{{view_last}}</span></div>
+
         </div>
     </section>
 
@@ -61,25 +69,6 @@
                         width="100%"></iframe>
             </div>
         </div>
-
-
-        <!--        <div class="row">-->
-        <!--            <div class="col-md-8">-->
-        <!--                &lt;!&ndash; Main news content &ndash;&gt;-->
-        <!--                <h1>Main News Headline</h1>-->
-        <!--                <p>News article content goes here.</p>-->
-        <!--            </div>-->
-        <!--            <div class="col-md-4">-->
-        <!--                &lt;!&ndash; Sidebar or additional news &ndash;&gt;-->
-        <!--                <h3>Related News</h3>-->
-        <!--                <ul>-->
-        <!--                    <li><a href="#">News Item 1</a></li>-->
-        <!--                    <li><a href="#">News Item 2</a></li>-->
-        <!--                    <li><a href="#">News Item 3</a></li>-->
-        <!--                </ul>-->
-        <!--            </div>-->
-        <!--        </div>-->
-        <!--    </section>-->
 
 </main>
 {% endblock content %}
@@ -108,7 +97,8 @@
             url: "/watching-views/",
             success: function(data) {
                 console.log(data,'--------------data')
-                $('#viewCount').html(data.view);
+                $('#viewCount1').html(data.view_first);
+                $('#viewCount2').html(data.view_last);
             },
             error: function(xhr, status, error) {
                 console.error(error);

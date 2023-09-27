@@ -65,15 +65,24 @@ def watching_views(request):
     if request.method == 'GET':
         # increase_view = random.randint(54, 94)
         increase_view = 1
-        count = Watchingviews.objects.first()
-        count.view = int(count.view) + int(increase_view)
-        count.save()
 
-        view = Watchingviews.objects.first()
-        view = view.view
+        count_first = Watchingviews.objects.first()
+        count_first.view = int(count_first.view) + int(increase_view)
+        count_first.save()
+
+        count_last = Watchingviews.objects.last()
+        count_last.view = int(count_last.view) + int(increase_view)
+        count_last.save()
+
+        view_first = Watchingviews.objects.first()
+        view_first = view_first.view
+
+        view_last = Watchingviews.objects.last()
+        view_last = view_last.view
 
         json_data = {
-            'view': view,
+            'view_first': view_first,
+            'view_last': view_last
         }
 
         return JsonResponse(json_data)
