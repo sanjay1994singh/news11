@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>News Channel Navbar</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        /* Custom CSS for the navbar */
+        .navbar {
+            background-color: #333;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar-brand {
+            color: #fff;
+            font-size: 24px;
+        }
+
+        .navbar-nav {
+            margin-left: auto;
+        }
+
+        .nav-item {
+            padding: 0 15px;
+        }
+
+        .nav-link {
+            color: #fff;
+        }
+
+        /* Custom CSS for content */
+        .content {
+            padding: 20px;
+        }
+
+        .article {
+            margin-bottom: 20px;
+            padding: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .pagination {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .pagination button {
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            margin: 0 5px;
+            cursor: pointer;
+        }
+
+        .pagination button:hover {
+            background-color: #0056b3;
+        }
+
+        .page-number {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+
+    </style>
+
+    <style>
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio (change as needed) */
+            height: 0;
+            overflow: hidden;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+
+    </style>
+
+    <style>
+    /* ... (your existing CSS styles) ... */
+
+    /* Custom styles for pagination buttons */
+    .pagination button {
+        background-color: #007BFF;
+        color: #fff;
+        border: none;
+        border-radius: 3px; /* Smaller border radius for a more compact look */
+        padding: 5px 10px; /* Smaller padding to reduce button size */
+        margin: 0 5px;
+        cursor: pointer;
+        font-size: 14px; /* Smaller font size */
+    }
+
+    .pagination button:hover {
+        background-color: #0056b3;
+    }
+
+    </style>
+
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container">
+        <a class="navbar-brand" href="#">News Channel</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">World</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Politics</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Business</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Entertainment</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Sports</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+    <div class="row content">
+        <div class="col-lg-8 mb-3">
+            <div class="row live-video-container">
+                {% for live_video in live_video %}
+                <div class="video-container mb-2 embed-responsive embed-responsive-16by9">
+                    {{ live_video.video_link|safe }}
+                </div>
+                {% endfor %}
+            </div>
+            <div class="pagination live-video-pagination">
+                <button class="prev"><i class="fas fa-chevron-left"></i> Previous</button>
+                <span class="page-number">Page 1</span>
+                <button class="next">Next <i class="fas fa-chevron-right"></i></button>
+            </div>
+        </div>
+
+        <div class="col-lg-4">
+            <h1>News Articles</h1>
+            <div class="articles-list">
+                {% for i in post %}
+                <div class="article">
+                    <h6>{{ i.title }}</h6>
+                    <p>{{ i.created_at }}</p>
+                </div>
+                {% endfor %}
+            </div>
+            <div class="pagination article-pagination">
+                <button class="prev"><i class="fas fa-chevron-left"></i> Previous</button>
+                <span class="page-number">Page 1</span>
+                <button class="next">Next <i class="fas fa-chevron-right"></i></button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <!-- ... (your existing code for the image carousel) ... -->
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.min.js"></script>
+
+<script>
+    $(document).ready(function() {
+        var articles = $('.article');
+        var numArticles = articles.length;
+        var articlesPerPage = 3;
+        var currentArticlePage = 1;
+
+        function showArticlePage(page) {
+            articles.hide();
+            for (var i = (page - 1) * articlesPerPage; i < page * articlesPerPage && i < numArticles; i++) {
+                articles.eq(i).show();
+            }
+            $('.article-pagination .page-number').text('Page ' + page);
+        }
+
+        showArticlePage(currentArticlePage);
+
+        $('.article-pagination .next').on('click', function() {
+            if (currentArticlePage < Math.ceil(numArticles / articlesPerPage)) {
+                currentArticlePage++;
+                showArticlePage(currentArticlePage);
+            }
+        });
+
+        $('.article-pagination .prev').on('click', function() {
+            if (currentArticlePage > 1) {
+                currentArticlePage--;
+                showArticlePage(currentArticlePage);
+            }
+        });
+
+        // Pagination for live videos
+        var liveVideos = $('.live-video-container .video-container');
+        var numLiveVideos = liveVideos.length;
+        var liveVideosPerPage = 1;
+        var currentLiveVideoPage = 1;
+
+        function showLiveVideoPage(page) {
+            liveVideos.hide();
+            for (var i = (page - 1) * liveVideosPerPage; i < page * liveVideosPerPage && i < numLiveVideos; i++) {
+                liveVideos.eq(i).show();
+            }
+            $('.live-video-pagination .page-number').text('Page ' + page);
+        }
+
+        showLiveVideoPage(currentLiveVideoPage);
+
+        $('.live-video-pagination .next').on('click', function() {
+            if (currentLiveVideoPage < Math.ceil(numLiveVideos / liveVideosPerPage)) {
+                currentLiveVideoPage++;
+                showLiveVideoPage(currentLiveVideoPage);
+            }
+        });
+
+        $('.live-video-pagination .prev').on('click', function() {
+            if (currentLiveVideoPage > 1) {
+                currentLiveVideoPage--;
+                showLiveVideoPage(currentLiveVideoPage);
+            }
+        });
+    });
+
+</script>
+</body>
+</html>
+
+
+

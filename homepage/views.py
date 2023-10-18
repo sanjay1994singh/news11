@@ -6,17 +6,82 @@ import random
 from django.core.mail import send_mail
 
 # Create your views here.
+import os
+from post.models import Post
+from PIL import Image, ImageDraw, ImageFont
+import random
+from faker import Faker
+
+from live_video.models import LiveVideo as l_v
+
+
+def generate_fake_image(width, height):
+    background_color = (random.randint(0, 255), random.randint(0, 255), random.randint(0, 255))
+    fake_image = Image.new('RGB', (width, height), background_color)
+    draw = ImageDraw.Draw(fake_image)
+    text = "Fake Image"
+    text_color = (255, 255, 255)
+    font_size = 24
+    font = ImageFont.load_default()
+    text_width, text_height = draw.textsize(text, font)
+    x = (width - text_width) / 2
+    y = (height - text_height) / 2
+    draw.text((x, y), text, fill=text_color, font=font)
+    return fake_image
+
+
+def handle():
+    fake = Faker()
+    for i in range(10):  # Generate 10 fake objects, you can change the number as needed
+        fake_title = fake.sentence()
+        fake_text = fake.paragraph()
+
+        # Create a Post object with title and description
+        post_obj = Post.objects.create(title=fake_title, description=fake_text)
+
+        # Generate a fake image and save it
+        image = generate_fake_image(300, 300)  # Adjust the dimensions as needed
+        image_path = f"media/post_image/{fake_title}.png"
+        image.save(image_path)
+
+        # Assign the image path to the Post object
+        post_obj.header_image = image_path
+        post_obj.save()
+
+
+# Ensure the 'fake_images' directory exists to save the generated images
+if not os.path.exists('media/post_image/'):
+    os.mkdir('media/post_image/')
+
+
+def main_homepage(request):
+    # handle()
+    live_video = l_v.objects.all().order_by('-id')[:3]
+    post = Post.objects.all()[:15]
+
+    context = {
+        'live_video': live_video,
+        'post': post
+    }
+    return render(request, 'main_homepage.html', context)
+
+
 def home_page(request):
     follow = Follow.objects.first()
     follow = follow.follow
 
-
     video = LiveVideo.objects.first()
+
     try:
         video = video.url
     except Exception as e:
         video = ''
         print(e, '------e---------')
+
+    try:
+        pass
+    except:
+        pass
     context = {
         'follow': follow,
         'video': video,
@@ -56,7 +121,6 @@ def follow(request):
             'follow': follow,
             # 'otp': otp
         }
-
 
         return JsonResponse(json_data)
 
