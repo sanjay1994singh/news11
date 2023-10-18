@@ -65,6 +65,14 @@ def main_homepage(request):
     }
     return render(request, 'main_homepage.html', context)
 
+def details(request, id):
+    post = Post.objects.get(id=id)
+
+    context = {
+        'post': post
+    }
+    return render(request, 'news_details.html', context)
+
 
 def home_page(request):
     follow = Follow.objects.first()
