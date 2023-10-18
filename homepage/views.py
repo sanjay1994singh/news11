@@ -55,7 +55,7 @@ if not os.path.exists('media/post_image/'):
 
 
 def main_homepage(request):
-    # handle()
+    handle()
     live_video = l_v.objects.all().order_by('-id')[:3]
     post = Post.objects.all()[:15]
 
