@@ -65,6 +65,7 @@ def main_homepage(request):
     }
     return render(request, 'main_homepage.html', context)
 
+
 def details(request, id):
     post = Post.objects.get(id=id)
 
@@ -155,6 +156,25 @@ def watching_views(request):
         json_data = {
             'view_first': view_first,
             'view_last': view_last
+        }
+
+        return JsonResponse(json_data)
+
+
+def watch_views(request):
+    if request.method == 'GET':
+        increase_view = random.randint(54, 94)
+        # increase_view = 1
+
+        pre_views = l_v.objects.last()
+        pre_views.views = int(pre_views.views) + int(increase_view)
+        pre_views.save()
+
+        current_views = pre_views.views
+        current_views = str(current_views) + ' views'
+
+        json_data = {
+            'current_views': current_views,
         }
 
         return JsonResponse(json_data)
