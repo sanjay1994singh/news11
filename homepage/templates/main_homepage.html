@@ -228,7 +228,19 @@
     // Call the function initially
     myFunction();
 
-    setInterval(myFunction, 60000);
+<!--    setInterval(myFunction, 60000);-->
+
+    function setRandomInterval() {
+        var randomInterval = Math.floor(Math.random() * (90000 - 10000 + 1)) + 10000; // Generates a random number between 10000 and 90000
+        console.log(randomInterval,'==================randomInterval')
+        setInterval(function() {
+            myFunction();
+            setRandomInterval(); // After each random interval, reset the interval
+        }, randomInterval);
+    }
+
+    // Call the random interval function to start the process
+    setRandomInterval();
 </script>
 
 {% endblock js %}
