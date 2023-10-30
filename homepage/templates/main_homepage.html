@@ -216,7 +216,6 @@
             type: "GET",
             url: "/watch-views/",
             success: function(data) {
-                console.log(data,'--------------data')
                 $('#viewCount1').html(data.current_views);
             },
             error: function(xhr, status, error) {
@@ -228,19 +227,18 @@
     // Call the function initially
     myFunction();
 
-<!--    setInterval(myFunction, 60000);-->
+    setInterval(myFunction, 150000);
 
-    function setRandomInterval() {
-        var randomInterval = Math.floor(Math.random() * (150000 - 90000 + 1)) + 90000; // Generates a random number between 10000 and 90000
-        console.log(randomInterval,'==================randomInterval')
-        setInterval(function() {
-            myFunction();
-            setRandomInterval(); // After each random interval, reset the interval
-        }, randomInterval);
-    }
+<!--    function setRandomInterval() {-->
+<!--        var randomInterval = Math.floor(Math.random() * (150000 - 90000 + 1)) + 90000; // Generates a random number between 10000 and 90000-->
+<!--        setInterval(function() {-->
+<!--            myFunction();-->
+<!--            setRandomInterval(); // After each random interval, reset the interval-->
+<!--        }, randomInterval);-->
+<!--    }-->
 
     // Call the random interval function to start the process
-    setRandomInterval();
+<!--    setRandomInterval();-->
 </script>
 
 {% endblock js %}
