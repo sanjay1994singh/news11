@@ -163,8 +163,8 @@ def watching_views(request):
 
 def watch_views(request):
     if request.method == 'GET':
-        increase_view = random.randint(18, 33)
-        # increase_view = 1
+        # increase_view = random.randint(18, 33)
+        increase_view = 1
 
         pre_views = l_v.objects.last()
         pre_views.views = int(pre_views.views) + int(increase_view)
