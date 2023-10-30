@@ -229,16 +229,16 @@
 
 <!--    setInterval(myFunction, 1200000);-->
 
-<!--    function setRandomInterval() {-->
-<!--        var randomInterval = Math.floor(Math.random() * (150000 - 90000 + 1)) + 90000; // Generates a random number between 10000 and 90000-->
-<!--        setInterval(function() {-->
-<!--            myFunction();-->
-<!--            setRandomInterval(); // After each random interval, reset the interval-->
-<!--        }, randomInterval);-->
-<!--    }-->
+    function setRandomInterval() {
+        var randomInterval = Math.floor(Math.random() * (150000 - 90000 + 1)) + 90000; // Generates a random number between 10000 and 90000
+        setInterval(function() {
+            myFunction();
+            setRandomInterval(); // After each random interval, reset the interval
+        }, randomInterval);
+    }
 
     // Call the random interval function to start the process
-<!--    setRandomInterval();-->
+    setRandomInterval();
 </script>
 
 {% endblock js %}
