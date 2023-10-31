@@ -216,6 +216,7 @@
             type: "GET",
             url: "/watch-views/",
             success: function(data) {
+                console.log(data.current_views)
                 $('#viewCount1').html(data.current_views);
             },
             error: function(xhr, status, error) {
