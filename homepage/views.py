@@ -14,6 +14,8 @@ from faker import Faker
 
 from live_video.models import LiveVideo as l_v
 
+from common.models import LookupField
+
 
 def generate_fake_image(width, height):
     background_color = (random.randint(0, 255), random.randint(0, 255), random.randint(0, 255))
@@ -163,8 +165,11 @@ def watching_views(request):
 
 def watch_views(request):
     if request.method == 'GET':
-        increase_view = random.randint(5, 8)
-        # increase_view = 1
+        views_speed = LookupField.objects.filter(code='view_speed')
+        increase_view = 1
+        if views_speed:
+            if views_speed[0].desc:
+                increase_view = random.randint(5, 8)
 
         pre_views = l_v.objects.last()
         pre_views.views = int(pre_views.views) + int(increase_view)
@@ -176,5 +181,5 @@ def watch_views(request):
         json_data = {
             'current_views': current_views,
         }
-
+        print(current_views,'==============current_views')
         return JsonResponse(json_data)
